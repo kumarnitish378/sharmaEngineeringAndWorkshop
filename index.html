@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sharma Engineering and Workshop | Precision Engineering & Fabrication</title>
-    <meta name="description" content="Sharma Engineering and Workshop - Agricultural machinery, custom metal fabrication, food processing machines, and hydraulic services in East Champaran, Bihar. 4.9★ Rated.">
+    <title>Sharma Engineering and Workshop | Precision Engineering, Fabrication & Robotics R&D</title>
+    <meta name="description" content="Sharma Engineering and Workshop - Agricultural machinery, custom metal fabrication, food processing machines, robotics R&D, and AI-driven automation in East Champaran, Bihar. 4.9★ Rated.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
@@ -22,6 +22,10 @@
             --gray: #e9ecef;
             --success: #28a745;
             --whatsapp: #25D366;
+            --tech-blue: #0a1628;
+            --tech-cyan: #00d4ff;
+            --tech-purple: #7c3aed;
+            --tech-glow: rgba(0, 212, 255, 0.15);
         }
 
         * {
@@ -118,19 +122,20 @@
 
         .nav-links {
             display: flex;
-            gap: 35px;
+            gap: 28px;
             list-style: none;
         }
 
         .nav-links a {
             color: rgba(255,255,255,0.85);
             text-decoration: none;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             transition: color 0.3s;
             position: relative;
+            white-space: nowrap;
         }
 
         .nav-links a::after {
@@ -150,6 +155,19 @@
 
         .nav-links a:hover::after {
             width: 100%;
+        }
+
+        .nav-links a .nav-badge {
+            display: inline-block;
+            background: var(--tech-cyan);
+            color: var(--tech-blue);
+            font-size: 0.6rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin-left: 4px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            vertical-align: middle;
         }
 
         .mobile-menu-btn {
@@ -286,6 +304,19 @@
             background: #128C7E;
             transform: translateY(-2px);
             box-shadow: 0 15px 40px rgba(37, 211, 102, 0.4);
+        }
+
+        .btn-tech {
+            background: transparent;
+            color: var(--tech-cyan);
+            border: 2px solid var(--tech-cyan);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
+        }
+
+        .btn-tech:hover {
+            background: var(--tech-cyan);
+            color: var(--tech-blue);
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
         }
 
         .hero-stats {
@@ -760,6 +791,350 @@
             line-height: 1.6;
         }
 
+        /* ==================== ROBOTICS & R&D SECTION ==================== */
+        .robotics {
+            background: var(--tech-blue);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .robotics::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 212, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(124, 58, 237, 0.08) 0%, transparent 50%),
+                url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect width="100" height="100" fill="none" stroke="rgba(0,212,255,0.03)" stroke-width="0.5"/></svg>');
+            background-size: 100% 100%, 100% 100%, 40px 40px;
+        }
+
+        .robotics .section-header h2 {
+            color: var(--white);
+        }
+
+        .robotics .section-header h2::after {
+            background: var(--tech-cyan);
+            box-shadow: 0 0 20px var(--tech-cyan);
+        }
+
+        .robotics .section-header p {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .robotics-intro {
+            max-width: 900px;
+            margin: 0 auto 60px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .robotics-intro h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.5rem;
+            color: var(--tech-cyan);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .robotics-intro p {
+            color: rgba(255,255,255,0.75);
+            line-height: 1.8;
+            font-size: 1.05rem;
+        }
+
+        .robotics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .robotics-card {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .robotics-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--tech-cyan), var(--tech-purple));
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .robotics-card:hover {
+            transform: translateY(-10px);
+            border-color: rgba(0, 212, 255, 0.4);
+            box-shadow: 0 20px 60px rgba(0, 212, 255, 0.1);
+        }
+
+        .robotics-card:hover::before {
+            opacity: 1;
+        }
+
+        .robotics-card-image {
+            width: 100%;
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .robotics-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.9;
+            transition: transform 0.5s;
+        }
+
+        .robotics-card:hover .robotics-card-image img {
+            transform: scale(1.05);
+        }
+
+        .robotics-card-image .status-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .status-tag.in-dev {
+            background: rgba(255, 193, 7, 0.2);
+            color: #ffc107;
+            border-color: rgba(255, 193, 7, 0.4);
+        }
+
+        .status-tag.prototype {
+            background: rgba(0, 212, 255, 0.2);
+            color: var(--tech-cyan);
+            border-color: rgba(0, 212, 255, 0.4);
+        }
+
+        .status-tag.research {
+            background: rgba(124, 58, 237, 0.2);
+            color: #a78bfa;
+            border-color: rgba(124, 58, 237, 0.4);
+        }
+
+        .robotics-card-content {
+            padding: 30px;
+        }
+
+        .robotics-card-content .tier-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.7rem;
+            color: var(--tech-cyan);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .robotics-card-content .tier-badge i {
+            font-size: 0.6rem;
+        }
+
+        .robotics-card-content h3 {
+            font-size: 1.4rem;
+            color: var(--white);
+            margin-bottom: 12px;
+            font-family: 'Oswald', sans-serif;
+        }
+
+        .robotics-card-content p {
+            color: rgba(255,255,255,0.65);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .robotics-specs {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+
+        .robotics-specs li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 0;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .robotics-specs li:last-child {
+            border-bottom: none;
+        }
+
+        .robotics-specs li i {
+            color: var(--tech-cyan);
+            font-size: 0.8rem;
+            width: 16px;
+        }
+
+        .robotics-card-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--tech-cyan);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+        }
+
+        .robotics-card-cta:hover {
+            gap: 12px;
+            color: var(--white);
+            text-shadow: 0 0 10px var(--tech-cyan);
+        }
+
+        .robotics-context {
+            margin-top: 60px;
+            background: rgba(0, 212, 255, 0.05);
+            border: 1px solid rgba(0, 212, 255, 0.15);
+            border-radius: 20px;
+            padding: 40px;
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .robotics-context-text h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            color: var(--tech-cyan);
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .robotics-context-text h3 i {
+            margin-right: 10px;
+            color: var(--primary);
+        }
+
+        .robotics-context-text p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .robotics-context-text ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .robotics-context-text ul li {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 0;
+            color: rgba(255,255,255,0.8);
+            font-size: 0.95rem;
+        }
+
+        .robotics-context-text ul li i {
+            color: var(--tech-cyan);
+            margin-top: 4px;
+            font-size: 0.9rem;
+        }
+
+        .robotics-context-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .robotics-context-visual .tech-circle {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.1) 0%, transparent 70%);
+            border: 1px solid rgba(0, 212, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            animation: techPulse 4s ease-in-out infinite;
+        }
+
+        @keyframes techPulse {
+            0%, 100% { box-shadow: 0 0 30px rgba(0, 212, 255, 0.1); }
+            50% { box-shadow: 0 0 60px rgba(0, 212, 255, 0.2); }
+        }
+
+        .robotics-context-visual .tech-circle i {
+            font-size: 4rem;
+            color: var(--tech-cyan);
+            opacity: 0.8;
+        }
+
+        .robotics-context-visual .orbit-ring {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border: 1px dashed rgba(0, 212, 255, 0.15);
+            border-radius: 50%;
+            animation: orbitRotate 20s linear infinite;
+        }
+
+        @keyframes orbitRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .robotics-cta-bar {
+            margin-top: 50px;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .robotics-cta-bar p {
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
         /* Gallery Section */
         .gallery {
             background: var(--light);
@@ -1126,9 +1501,16 @@
                 min-height: 350px;
             }
 
-            .sticky-cta {
-                flex-direction: column;
-                gap: 8px;
+            .robotics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .robotics-context {
+                grid-template-columns: 1fr;
+            }
+
+            .robotics-context-visual {
+                order: -1;
             }
         }
 
@@ -1177,6 +1559,10 @@
             .sticky-cta .btn {
                 width: 100%;
                 justify-content: center;
+            }
+
+            .robotics-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1303,6 +1689,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
+                <li><a href="#robotics">Research <span class="nav-badge">R&D</span></a></li>
                 <li><a href="#why-us">Why Us</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -1534,6 +1921,121 @@
         </div>
     </section>
 
+    <!-- ==================== ROBOTICS & R&D SECTION ==================== -->
+    <section class="robotics" id="robotics">
+        <div class="container">
+            <div class="section-header">
+                <h2>Robotics & R&D Integration</h2>
+                <p>Pioneering the future of agricultural and logistical automation from East Champaran</p>
+            </div>
+
+            <div class="robotics-intro">
+                <h3><i class="fas fa-microchip"></i> Innovation Lab</h3>
+                <p>At Sharma Engineering, we believe the future of Indian agriculture lies in smart automation. Our dedicated R&D division is building next-generation robotic solutions to address labor shortages, difficult terrain, and the growing demand for precision farming across Bihar and beyond.</p>
+            </div>
+
+            <div class="robotics-grid">
+                <!-- Tier 1: Manual RC Rover -->
+                <div class="robotics-card">
+                    <div class="robotics-card-image">
+                        <img src="https://kimi-web-img.moonshot.cn/img/inrorwxhkjlolm5p.leadongcdn.com/4d930acbf7df2ce4e76b8f2a07c6b922815da8e9.jpg" alt="Manual RC Rover Chassis">
+                        <span class="status-tag in-dev"><i class="fas fa-tools"></i> In Development</span>
+                    </div>
+                    <div class="robotics-card-content">
+                        <div class="tier-badge"><i class="fas fa-circle"></i> Tier 1 — Manual Control</div>
+                        <h3>High-Torque RC Rover</h3>
+                        <p>A rugged, remote-controlled chassis engineered for hazardous inspections, uneven farmland, and confined industrial spaces. Built with high-torque motors and long-range RF communication.</p>
+                        <ul class="robotics-specs">
+                            <li><i class="fas fa-bolt"></i> High-torque DC motor drive</li>
+                            <li><i class="fas fa-signal"></i> 2.4GHz long-range RF control</li>
+                            <li><i class="fas fa-mountain"></i> All-terrain rubber track system</li>
+                            <li><i class="fas fa-battery-full"></i> 4-hour continuous operation</li>
+                            <li><i class="fas fa-weight-hanging"></i> 50kg payload capacity</li>
+                        </ul>
+                        <a href="https://wa.me/919661903040?text=Hi%20Sharma%20Engineering%2C%0A%0AI%20am%20intrigued%20by%20your%20Robotics%20Research%20and%20would%20like%20to%20know%20more%20about%20the%20Manual%20RC%20Rover.%0A%0APlease%20share%20specifications%2C%20pricing%2C%20and%20availability.%0A%0AThank%20you!" target="_blank" class="robotics-card-cta">
+                            <i class="fab fa-whatsapp"></i> Inquire About RC Rover
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tier 2: Semiautomatic Transport -->
+                <div class="robotics-card">
+                    <div class="robotics-card-image">
+                        <img src="https://kimi-web-img.moonshot.cn/img/modula.us/279bc02989891b190b548ee1b472a21782ba7d9f.jpg" alt="Semiautonomous Warehouse Robot">
+                        <span class="status-tag prototype"><i class="fas fa-flask"></i> Prototyping Phase</span>
+                    </div>
+                    <div class="robotics-card-content">
+                        <div class="tier-badge"><i class="fas fa-circle"></i> Tier 2 — Semiautomatic</div>
+                        <h3>Assistive Transport Rover</h3>
+                        <p>Next-level logistics automation with assistive navigation, ultrasonic obstacle detection, and autonomous waypoint following. Ideal for warehouse operations and farm-to-market transport.</p>
+                        <ul class="robotics-specs">
+                            <li><i class="fas fa-route"></i> GPS + IMU waypoint navigation</li>
+                            <li><i class="fas fa-radar"></i> Ultrasonic obstacle detection</li>
+                            <li><i class="fas fa-hand-pointer"></i> Manual override capability</li>
+                            <li><i class="fas fa-box"></i> 100kg cargo payload</li>
+                            <li><i class="fas fa-wifi"></i> WiFi/Bluetooth telemetry</li>
+                        </ul>
+                        <a href="https://wa.me/919661903040?text=Hi%20Sharma%20Engineering%2C%0A%0AI%20am%20intrigued%20by%20your%20Robotics%20Research%20and%20would%20like%20to%20know%20more%20about%20the%20Semiautomatic%20Transport%20Rover.%0A%0APlease%20share%20specifications%2C%20pricing%2C%20and%20availability.%0A%0AThank%20you!" target="_blank" class="robotics-card-cta">
+                            <i class="fab fa-whatsapp"></i> Inquire About Transport Rover
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Tier 3: Fully Automatic AI Rover -->
+                <div class="robotics-card">
+                    <div class="robotics-card-image">
+                        <img src="https://kimi-web-img.moonshot.cn/img/static01.nyt.com/3d1924f0a4ac6f9304bab82a785ab448879b5d71.jpg" alt="AI Autonomous Farming Robot">
+                        <span class="status-tag research"><i class="fas fa-brain"></i> Research Phase</span>
+                    </div>
+                    <div class="robotics-card-content">
+                        <div class="tier-badge"><i class="fas fa-circle"></i> Tier 3 — Fully Automatic AI</div>
+                        <h3>AI Autonomous Farm Rover</h3>
+                        <p>The pinnacle of our R&D. An AI-powered rover with computer vision, deep learning pathfinding, and independent task execution for seeding, crop monitoring, and precision agriculture.</p>
+                        <ul class="robotics-specs">
+                            <li><i class="fas fa-eye"></i> Computer vision (OpenCV + AI)</li>
+                            <li><i class="fas fa-brain"></i> Deep learning pathfinding</li>
+                            <li><i class="fas fa-seedling"></i> Autonomous seeding & monitoring</li>
+                            <li><i class="fas fa-satellite"></i> RTK-GPS cm-level accuracy</li>
+                            <li><i class="fas fa-cloud"></i> Cloud-connected data analytics</li>
+                        </ul>
+                        <a href="https://wa.me/919661903040?text=Hi%20Sharma%20Engineering%2C%0A%0AI%20am%20intrigued%20by%20your%20Robotics%20Research%20and%20would%20like%20to%20know%20more%20about%20the%20AI%20Autonomous%20Farm%20Rover.%0A%0APlease%20share%20specifications%2C%20pricing%2C%20and%20availability.%0A%0AThank%20you!" target="_blank" class="robotics-card-cta">
+                            <i class="fab fa-whatsapp"></i> Inquire About AI Rover
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Why Research Robotics? Context Block -->
+            <div class="robotics-context">
+                <div class="robotics-context-text">
+                    <h3><i class="fas fa-lightbulb"></i> Why Research Robotics?</h3>
+                    <p>Bihar's agricultural landscape faces unique challenges — seasonal labor shortages, difficult monsoon terrain, and the need for precision in smallholder farming. Our robotics R&D directly addresses these pain points.</p>
+                    <p>By developing affordable, rugged, and intelligent robotic systems locally, we aim to democratize farm automation for every farmer in East Champaran and beyond.</p>
+                    <ul>
+                        <li><i class="fas fa-users-slash"></i> <strong>Labor Shortage:</strong> Automates repetitive tasks during peak seasons when labor is scarce and expensive.</li>
+                        <li><i class="fas fa-mountain"></i> <strong>Difficult Terrain:</strong> Track-based rovers navigate waterlogged fields and uneven ground where tractors can't go.</li>
+                        <li><i class="fas fa-chart-line"></i> <strong>Precision Agriculture:</strong> AI-driven seeding and monitoring reduce waste and increase yield by up to 30%.</li>
+                        <li><i class="fas fa-rupee-sign"></i> <strong>Cost Efficiency:</strong> Local manufacturing keeps prices 60% lower than imported alternatives.</li>
+                    </ul>
+                </div>
+                <div class="robotics-context-visual">
+                    <div class="orbit-ring"></div>
+                    <div class="tech-circle">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Robotics CTA -->
+            <div class="robotics-cta-bar">
+                <p>Want to collaborate, invest, or learn more about our robotics research?</p>
+                <a href="https://wa.me/919661903040?text=Hi%20Sharma%20Engineering%2C%0A%0AI%20am%20intrigued%20by%20your%20Robotics%20Research%20and%20would%20like%20to%20discuss%20further.%0A%0APlease%20let%20me%20know%20how%20we%20can%20collaborate%20or%20if%20you%20can%20share%20more%20technical%20details.%0A%0AThank%20you!" target="_blank" class="btn btn-tech">
+                    <i class="fab fa-whatsapp"></i> Discuss Robotics R&D
+                </a>
+            </div>
+        </div>
+    </section>
+
     <!-- Why Choose Us -->
     <section class="why-us" id="why-us">
         <div class="container">
@@ -1673,7 +2175,7 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <div class="logo-text" style="color: var(--white); margin-bottom: 15px;">SHARMA <span style="color: var(--primary);">ENGINEERING</span></div>
-                    <p>Precision engineering and quality fabrication for agriculture and industry. Serving East Champaran since 2019 with dedication and expertise.</p>
+                    <p>Precision engineering, quality fabrication, and cutting-edge robotics R&D for agriculture and industry. Serving East Champaran since 2019 with dedication and innovation.</p>
                     <div class="footer-social">
                         <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
@@ -1686,6 +2188,7 @@
                         <li><a href="#home">Home</a></li>
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#services">Services</a></li>
+                        <li><a href="#robotics">Research (R&D)</a></li>
                         <li><a href="#gallery">Gallery</a></li>
                         <li><a href="#contact">Contact</a></li>
                     </ul>
@@ -1701,18 +2204,18 @@
                     </ul>
                 </div>
                 <div class="footer-links">
-                    <h4>Service Areas</h4>
+                    <h4>Robotics R&D</h4>
                     <ul>
-                        <li>Kotwa, Bihar</li>
-                        <li>Motihari</li>
-                        <li>East Champaran</li>
-                        <li>Bettiah</li>
-                        <li>Surrounding Districts</li>
+                        <li><a href="#robotics">RC Rover Chassis</a></li>
+                        <li><a href="#robotics">Semiautomatic Transport</a></li>
+                        <li><a href="#robotics">AI Autonomous Rover</a></li>
+                        <li><a href="#robotics">Precision Agriculture</a></li>
+                        <li><a href="#robotics">Collaborate With Us</a></li>
                     </ul>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Sharma Engineering and Workshop. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: var(--primary);"></i> for Quality</p>
+                <p>&copy; 2025 Sharma Engineering and Workshop. All Rights Reserved. | Designed with <i class="fas fa-heart" style="color: var(--primary);"></i> for Quality & Innovation</p>
             </div>
         </div>
     </footer>
@@ -1779,7 +2282,6 @@
                 navbar.classList.remove('scrolled');
             }
 
-            // Show sticky CTA after scrolling past hero
             if (window.scrollY > window.innerHeight * 0.8) {
                 stickyCta.classList.add('visible');
             } else {
@@ -1815,7 +2317,7 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.service-card, .why-card, .gallery-item, .contact-item').forEach(el => {
+        document.querySelectorAll('.service-card, .why-card, .gallery-item, .contact-item, .robotics-card').forEach(el => {
             el.classList.add('fade-in');
             observer.observe(el);
         });
@@ -1837,12 +2339,10 @@
         // Live Business Hours Status
         function updateLiveStatus() {
             const now = new Date();
-            const day = now.getDay(); // 0 = Sunday, 1-6 = Mon-Sat
+            const day = now.getDay();
             const hour = now.getHours();
             const statusText = document.getElementById('liveStatusText');
             
-            // Business hours: Mon-Sat 9:00 AM - 5:00 PM (IST = UTC+5:30)
-            // For simplicity, using local time. Adjust if needed.
             const isOpen = (day >= 1 && day <= 6) && (hour >= 9 && hour < 17);
             
             if (isOpen) {
@@ -1855,7 +2355,7 @@
         }
 
         updateLiveStatus();
-        setInterval(updateLiveStatus, 60000); // Update every minute
+        setInterval(updateLiveStatus, 60000);
 
         // Modal functionality
         const modal = document.getElementById('quoteModal');
@@ -1871,7 +2371,6 @@
             }
         });
 
-        // Open modal from sticky CTA WhatsApp button
         document.querySelector('.sticky-cta .btn-whatsapp').addEventListener('click', (e) => {
             e.preventDefault();
             modal.classList.add('active');
