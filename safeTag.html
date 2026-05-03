@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Safe-Tag: Business Execution Blueprint</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 300px;
+            max-height: 350px;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 350px;
+                max-height: 400px;
+            }
+        }
+        .step-active {
+            border-left-color: #0d9488;
+            background-color: #f0fdfa;
+        }
+        .step-inactive {
+            border-left-color: #d6d3d1;
+        }
+        .fade-in {
+            animation: fadeIn 0.4s ease-in-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans leading-relaxed selection:bg-teal-200">
+
+    <!-- Chosen Palette: Warm Neutrals (Stone-50 to Stone-800) with Teal Accents (Teal-600) for a calming, trustworthy, health/safety-oriented aesthetic. -->
+    
+    <!-- Application Structure Plan: The SPA is structured as an interactive investor/strategy dashboard. It begins with the emotional hook and core concept (Problem/Solution) to establish value. It then moves into Market Context with interactive tabs to explore target demographics. The core of the dashboard is the Financial section, utilizing dynamic charts to prove the low barrier to entry and high profit margins. It concludes with an interactive roadmap for execution. This flow moves the user from "Why this matters" to "How profitable is it" to "How do we build it". -->
+    
+    <!-- Visualization & Content Choices: 
+         - Financial Breakdown (Goal: Organize/Compare): Doughnut chart via Chart.js to visualize the proportional makeup of the ₹9,150 average MVP startup cost. Justification: Quickly shows that hardware/printing makes up the bulk, not expensive software.
+         - Unit Economics (Goal: Compare): Bar chart via Chart.js comparing Target Price vs. Cost vs. Profit. Justification: Clearly illustrates the high margin (₹70-120 per tag) visually.
+         - Target Audiences (Goal: Organize): Interactive card grid. Justification: Makes reading demographic details engaging rather than a static list.
+         - Execution Steps (Goal: Change/Process): Vertical interactive timeline. Justification: Breaks down the "How to start" into digestible, sequential steps without overwhelming the user with text. 
+         Library: Chart.js for all charts. Standard HTML/Tailwind for interactive layouts. NO SVG used. -->
+         
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+
+    <nav class="fixed top-0 w-full bg-white/90 backdrop-blur shadow-sm z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="text-2xl font-bold text-teal-700 tracking-tight">&#128273; Safe-Tag</div>
+            <div class="hidden md:flex space-x-6 text-sm font-medium text-stone-600">
+                <a href="#concept" class="hover:text-teal-600 transition-colors">The Concept</a>
+                <a href="#market" class="hover:text-teal-600 transition-colors">Market & Audiences</a>
+                <a href="#financials" class="hover:text-teal-600 transition-colors">Financial Viability</a>
+                <a href="#execution" class="hover:text-teal-600 transition-colors">Execution Roadmap</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="pt-24 pb-12 max-w-6xl mx-auto px-4">
+
+        <section id="concept" class="mb-20 pt-8">
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <h1 class="text-4xl md:text-5xl font-extrabold text-stone-900 mb-4 tracking-tight">The 10-Second Window That Saves a Life</h1>
+                <p class="text-lg text-stone-600">Explore the Safe-Tag business model: A high-margin, low-investment ecosystem combining the universality of QR codes with the professionalism of RFID technology to solve critical emergency communication failures in India.</p>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-stone-100 p-8 md:p-12">
+                <h2 class="text-2xl font-bold text-stone-800 mb-6 border-b border-stone-100 pb-4">Concept Analysis & Value Proposition</h2>
+                <p class="mb-8 text-stone-600">This section outlines the core problem addressed by Safe-Tag and demonstrates how the proposed hybrid technology offers a superior solution compared to traditional methods. Interact with the scenario below to understand the real-world impact of the product.</p>
+                
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <div class="bg-rose-50 border border-rose-100 rounded-xl p-6 mb-6">
+                            <h3 class="text-rose-800 font-bold mb-2 flex items-center">&#9888; The Problem</h3>
+                            <p class="text-sm text-stone-700">In emergencies involving accidents, missing children, or lost luggage, critical information is often inaccessible. The "Golden Hour" is lost because blood groups, medical history, and emergency contacts are unknown to first responders or Good Samaritans.</p>
+                        </div>
+                        <div class="bg-teal-50 border border-teal-100 rounded-xl p-6">
+                            <h3 class="text-teal-800 font-bold mb-2 flex items-center">&#128161; The Solution</h3>
+                            <p class="text-sm text-stone-700">A hybrid RFID + QR Code tag ecosystem. <br><br><strong>QR Code:</strong> Instantly accessible by any smartphone user without a specialized app.<br><strong>RFID (NFC/HF):</strong> Highly durable, professional tap-to-read functionality ideal for institutional use (Schools, Hospitals).</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-stone-50 rounded-xl p-6 border border-stone-200">
+                        <h3 class="text-center font-bold text-stone-800 mb-4">Interactive Scenario Testing</h3>
+                        <div class="flex justify-center space-x-2 mb-6">
+                            <button id="btn-scenario-lost" class="px-4 py-2 bg-stone-800 text-white text-sm font-medium rounded-lg hover:bg-stone-700 transition">Missing Child</button>
+                            <button id="btn-scenario-luggage" class="px-4 py-2 bg-white border border-stone-300 text-stone-700 text-sm font-medium rounded-lg hover:bg-stone-100 transition">Lost Luggage</button>
+                        </div>
+                        <div id="scenario-display" class="bg-white p-5 rounded-lg border border-stone-200 min-h-[150px] flex flex-col justify-center fade-in">
+                            <h4 class="font-bold text-teal-700 mb-2">Scenario: A child is lost in a crowded market.</h4>
+                            <p class="text-sm text-stone-600 mb-3">The child is too scared to speak or recall phone numbers. Bystanders are unable to help immediately.</p>
+                            <div class="bg-teal-50 p-3 rounded border border-teal-100 text-sm text-teal-900">
+                                <strong>With Safe-Tag:</strong> A shopkeeper scans the QR code on the child's backpack. Instantly, the parent's phone number appears on their screen. The parent is called within 10 seconds.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="market" class="mb-20 pt-8">
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold text-stone-800 mb-4">Market Readiness & Target Audiences</h2>
+                <p class="text-lg text-stone-600">This section analyzes the Indian market's suitability for this product and identifies the primary target demographics. Click through the audience cards to explore the tailored marketing pitches and specific use-cases for each segment.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 cursor-pointer hover:shadow-md transition-shadow border-t-4 border-t-teal-500" onclick="updateAudience('parents')">
+                    <div class="text-4xl mb-4">&#128106;</div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">Parents & Schools</h3>
+                    <p class="text-sm text-stone-500">High-emotion trigger market.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 cursor-pointer hover:shadow-md transition-shadow border-t-4 border-t-amber-500" onclick="updateAudience('travelers')">
+                    <div class="text-4xl mb-4">&#9992;</div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">Travelers</h3>
+                    <p class="text-sm text-stone-500">Utility and asset recovery.</p>
+                </div>
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-100 cursor-pointer hover:shadow-md transition-shadow border-t-4 border-t-rose-500" onclick="updateAudience('pets')">
+                    <div class="text-4xl mb-4">&#128062;</div>
+                    <h3 class="text-xl font-bold text-stone-800 mb-2">Pet Owners</h3>
+                    <p class="text-sm text-stone-500">Digital collar alternatives.</p>
+                </div>
+            </div>
+
+            <div id="audience-details" class="bg-white p-8 rounded-2xl shadow-sm border border-stone-100 min-h-[200px] fade-in">
+                <div class="flex items-center gap-4 mb-4">
+                    <span class="text-3xl">&#128106;</span>
+                    <h3 class="text-2xl font-bold text-stone-800">Parents & Institutional Tie-ups</h3>
+                </div>
+                <p class="text-stone-600 mb-4 leading-relaxed"><strong>The Pitch:</strong> "Protection for your little ones. Give your loved ones a voice when they can't speak for themselves."</p>
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div class="bg-stone-50 p-4 rounded-lg">
+                        <strong>Indian Context:</strong> Safety of children is the highest emotional trigger for Indian parents. High willingness to pay for security products.
+                    </div>
+                    <div class="bg-stone-50 p-4 rounded-lg">
+                        <strong>Product Focus:</strong> Mini-Tags for school bags, wearable wristbands, and integration into smart school ID cards (B2B).
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 bg-teal-800 text-teal-50 rounded-2xl p-6 text-center">
+                <span class="text-2xl block mb-2">&#128200;</span>
+                <h4 class="font-bold text-lg mb-1">Why India is Ready</h4>
+                <p class="text-sm text-teal-200">India possesses the highest UPI/QR penetration globally (750M+ smartphone users). The behavioral friction of "scanning a code" has been completely eliminated from the general populace.</p>
+            </div>
+        </section>
+
+        <section id="financials" class="mb-20 pt-8">
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold text-stone-800 mb-4">Financial Breakdown & Profitability</h2>
+                <p class="text-lg text-stone-600">This dashboard section visualizes the minimal capital required to launch Safe-Tag from a home setup and breaks down the unit economics to highlight the high profitability margin per tag sold. Interact with the charts for exact figures.</p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-100">
+                    <h3 class="text-xl font-bold text-stone-800 mb-1 text-center">MVP Startup Capital</h3>
+                    <p class="text-xs text-stone-500 text-center mb-6">Total Estimated: ₹7,300 – ₹11,000 (Avg ₹9,150)</p>
+                    <div class="chart-container">
+                        <canvas id="startupChart"></canvas>
+                    </div>
+                    <p class="mt-6 text-sm text-stone-600 text-center">The operation can be fully launched from a single room using basic, readily available equipment.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-stone-100">
+                    <h3 class="text-xl font-bold text-stone-800 mb-1 text-center">Unit Economics (Per Tag)</h3>
+                    <p class="text-xs text-stone-500 text-center mb-6">Target Selling Price: ₹175 (Average)</p>
+                    <div class="chart-container">
+                        <canvas id="profitChart"></canvas>
+                    </div>
+                    <div class="mt-6 flex justify-center gap-4">
+                        <div class="text-center px-4 border-r border-stone-200">
+                            <span class="block text-2xl font-bold text-teal-600">~60%</span>
+                            <span class="text-xs text-stone-500 uppercase tracking-wide">Net Margin</span>
+                        </div>
+                        <div class="text-center px-4">
+                            <span class="block text-2xl font-bold text-stone-800">50</span>
+                            <span class="text-xs text-stone-500 uppercase tracking-wide">Units to Breakeven</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="execution" class="mb-20 pt-8">
+            <div class="mb-10">
+                <h2 class="text-3xl font-bold text-stone-800 mb-4">Execution Strategy (Home-Based)</h2>
+                <p class="text-lg text-stone-600">This section outlines the practical, step-by-step roadmap required to take Safe-Tag from concept to customer delivery. Click on each step in the timeline to view detailed operational instructions.</p>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-stone-100 flex flex-col md:flex-row gap-8">
+                
+                <div class="md:w-1/3 border-l-2 border-stone-200 ml-4 pl-0">
+                    <div class="cursor-pointer pl-6 py-4 border-l-4 step-active -ml-[3px] transition-colors" id="step1-btn" onclick="showStep(1)">
+                        <div class="font-bold text-stone-800">Step 1: Software</div>
+                        <div class="text-sm text-stone-500">Portal Setup</div>
+                    </div>
+                    <div class="cursor-pointer pl-6 py-4 border-l-4 step-inactive -ml-[3px] transition-colors" id="step2-btn" onclick="showStep(2)">
+                        <div class="font-bold text-stone-800">Step 2: Generation</div>
+                        <div class="text-sm text-stone-500">QR Linking</div>
+                    </div>
+                    <div class="cursor-pointer pl-6 py-4 border-l-4 step-inactive -ml-[3px] transition-colors" id="step3-btn" onclick="showStep(3)">
+                        <div class="font-bold text-stone-800">Step 3: Encoding</div>
+                        <div class="text-sm text-stone-500">RFID Writing</div>
+                    </div>
+                    <div class="cursor-pointer pl-6 py-4 border-l-4 step-inactive -ml-[3px] transition-colors" id="step4-btn" onclick="showStep(4)">
+                        <div class="font-bold text-stone-800">Step 4: Fulfillment</div>
+                        <div class="text-sm text-stone-500">Packaging & Shipping</div>
+                    </div>
+                </div>
+
+                <div class="md:w-2/3 bg-stone-50 rounded-xl p-8 border border-stone-200">
+                    <div id="step-content" class="fade-in">
+                        <div class="inline-block bg-teal-100 text-teal-800 text-xs font-bold px-3 py-1 rounded-full mb-4">PHASE 1</div>
+                        <h3 class="text-2xl font-bold text-stone-800 mb-4">Software Setup & User Registration</h3>
+                        <p class="text-stone-600 mb-4">Create a simple, secure landing page using a low-cost host (like Hostinger). This portal will allow customers to enter their emergency details (Name, Contact, Blood Group, Allergies).</p>
+                        <ul class="list-disc list-inside text-sm text-stone-600 space-y-2">
+                            <li>Generate a unique identifier (URL) for each registered user.</li>
+                            <li>Implement a "Privacy Toggle" allowing users to hide sensitive data until an "Emergency Mode" is activated.</li>
+                            <li>Ensure mobile responsiveness, as scanning will occur via smartphones.</li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-stone-900 text-stone-400 py-8 text-center text-sm">
+        <div class="max-w-6xl mx-auto px-4">
+            <p>Safe-Tag Business Blueprint &copy; 2026. Interactive Report Dashboard.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            const costData = {
+                labels: ['RFID Writer/Encoder', 'Blank Keychains', 'PVC Cards', 'Thermal Printer', 'Domain/Web'],
+                datasets: [{
+                    data: [2000, 1000, 650, 4000, 1500],
+                    backgroundColor: ['#0d9488', '#14b8a6', '#5eead4', '#0f766e', '#ccfbf1'],
+                    borderWidth: 0,
+                    hoverOffset: 4
+                }]
+            };
+
+            const ctxStartup = document.getElementById('startupChart').getContext('2d');
+            new Chart(ctxStartup, {
+                type: 'doughnut',
+                data: costData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'right', labels: { boxWidth: 12, font: { family: 'sans-serif', size: 11 } } },
+                        tooltip: { callbacks: { label: function(context) { return ' ₹' + context.raw; } } }
+                    },
+                    cutout: '70%'
+                }
+            });
+
+            const profitData = {
+                labels: ['Production Cost', 'Marketing Cost', 'Net Profit'],
+                datasets: [{
+                    label: 'Amount in INR',
+                    data: [38, 40, 97],
+                    backgroundColor: ['#d6d3d1', '#a8a29e', '#0d9488'],
+                    borderRadius: 4
+                }]
+            };
+
+            const ctxProfit = document.getElementById('profitChart').getContext('2d');
+            new Chart(ctxProfit, {
+                type: 'bar',
+                data: profitData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { callbacks: { label: function(context) { return ' ₹' + context.raw; } } }
+                    },
+                    scales: {
+                        y: { beginAtZero: true, grid: { color: '#f5f5f4' }, title: { display: true, text: 'INR (₹)' } },
+                        x: { grid: { display: false }, ticks: { maxRotation: 45, minRotation: 45 } }
+                    }
+                }
+            });
+
+            const btnLost = document.getElementById('btn-scenario-lost');
+            const btnLuggage = document.getElementById('btn-scenario-luggage');
+            const scenarioDisplay = document.getElementById('scenario-display');
+
+            const scenarios = {
+                lost: {
+                    title: "Scenario: A child is lost in a crowded market.",
+                    desc: "The child is too scared to speak or recall phone numbers. Bystanders are unable to help immediately.",
+                    resolution: "<strong>With Safe-Tag:</strong> A shopkeeper scans the QR code on the child's backpack. Instantly, the parent's phone number appears on their screen. The parent is called within 10 seconds."
+                },
+                luggage: {
+                    title: "Scenario: High-value luggage left at an airport terminal.",
+                    desc: "Airport security finds an unmarked bag. Standard procedure dictates moving it to lost & found, causing severe delays for the traveler.",
+                    resolution: "<strong>With Safe-Tag:</strong> Security taps the RFID tag with their device or scans the QR. They retrieve the owner's flight details and mobile number, allowing immediate interception before the owner leaves the airport."
+                }
+            };
+
+            function updateScenario(type) {
+                if(type === 'lost') {
+                    btnLost.className = "px-4 py-2 bg-stone-800 text-white text-sm font-medium rounded-lg transition";
+                    btnLuggage.className = "px-4 py-2 bg-white border border-stone-300 text-stone-700 text-sm font-medium rounded-lg hover:bg-stone-100 transition";
+                } else {
+                    btnLuggage.className = "px-4 py-2 bg-stone-800 text-white text-sm font-medium rounded-lg transition";
+                    btnLost.className = "px-4 py-2 bg-white border border-stone-300 text-stone-700 text-sm font-medium rounded-lg hover:bg-stone-100 transition";
+                }
+                
+                scenarioDisplay.classList.remove('fade-in');
+                void scenarioDisplay.offsetWidth;
+                
+                scenarioDisplay.innerHTML = `
+                    <h4 class="font-bold text-teal-700 mb-2">${scenarios[type].title}</h4>
+                    <p class="text-sm text-stone-600 mb-3">${scenarios[type].desc}</p>
+                    <div class="bg-teal-50 p-3 rounded border border-teal-100 text-sm text-teal-900">
+                        ${scenarios[type].resolution}
+                    </div>
+                `;
+                scenarioDisplay.classList.add('fade-in');
+            }
+
+            btnLost.addEventListener('click', () => updateScenario('lost'));
+            btnLuggage.addEventListener('click', () => updateScenario('luggage'));
+
+            window.updateAudience = function(type) {
+                const detailsContainer = document.getElementById('audience-details');
+                detailsContainer.classList.remove('fade-in');
+                void detailsContainer.offsetWidth;
+                
+                let content = '';
+                if(type === 'parents') {
+                    content = `
+                        <div class="flex items-center gap-4 mb-4">
+                            <span class="text-3xl">&#128106;</span>
+                            <h3 class="text-2xl font-bold text-stone-800">Parents & Institutional Tie-ups</h3>
+                        </div>
+                        <p class="text-stone-600 mb-4 leading-relaxed"><strong>The Pitch:</strong> "Protection for your little ones. Give your loved ones a voice when they can't speak for themselves."</p>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div class="bg-stone-50 p-4 rounded-lg"><strong>Indian Context:</strong> Safety of children is the highest emotional trigger for Indian parents. High willingness to pay for security products.</div>
+                            <div class="bg-stone-50 p-4 rounded-lg"><strong>Product Focus:</strong> Mini-Tags for school bags, wearable wristbands, and integration into smart school ID cards (B2B).</div>
+                        </div>`;
+                } else if(type === 'travelers') {
+                    content = `
+                        <div class="flex items-center gap-4 mb-4">
+                            <span class="text-3xl">&#9992;</span>
+                            <h3 class="text-2xl font-bold text-stone-800">Travelers & Daily Commuters</h3>
+                        </div>
+                        <p class="text-stone-600 mb-4 leading-relaxed"><strong>The Pitch:</strong> "Find your bag before it leaves the airport. The ultimate safeguard for your valuables."</p>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div class="bg-stone-50 p-4 rounded-lg"><strong>Indian Context:</strong> Massive boom in domestic travel and two-wheeler commuting. Helmet stickers are a massive untapped sub-niche for emergency medical info on highways.</div>
+                            <div class="bg-stone-50 p-4 rounded-lg"><strong>Product Focus:</strong> Durable PVC luggage tags, weatherproof helmet stickers, and keychain variants for vehicles.</div>
+                        </div>`;
+                } else if(type === 'pets') {
+                    content = `
+                        <div class="flex items-center gap-4 mb-4">
+                            <span class="text-3xl">&#128062;</span>
+                            <h3 class="text-2xl font-bold text-stone-800">Pet Owners</h3>
+                        </div>
+                        <p class="text-stone-600 mb-4 leading-relaxed"><strong>The Pitch:</strong> "A digital collar for your furry friends. Ensure they always find their way home."</p>
+                        <div class="grid grid-cols-2 gap-4 text-sm">
+                            <div class="bg-stone-50 p-4 rounded-lg"><strong>Indian Context:</strong> Rapidly growing pet care market in urban centers. Owners are actively seeking modern alternatives to traditional engraved metal tags.</div>
+                            <div class="bg-stone-50 p-4 rounded-lg"><strong>Product Focus:</strong> Small, chew-resistant collar tags with clear QR prints and embedded RFID for vet clinic integration.</div>
+                        </div>`;
+                }
+                
+                detailsContainer.innerHTML = content;
+                detailsContainer.classList.add('fade-in');
+            };
+
+            const executionSteps = {
+                1: { phase: "PHASE 1", title: "Software Setup & User Registration", desc: "Create a simple, secure landing page using a low-cost host. This portal will allow customers to enter their emergency details.", list: ["Generate a unique identifier (URL) for each registered user.", "Implement a 'Privacy Toggle' allowing users to hide sensitive data.", "Ensure mobile responsiveness, as scanning will occur via smartphones."] },
+                2: { phase: "PHASE 2", title: "QR Generation", desc: "Translate the unique user URL into a scannable format.", list: ["Link the QR code directly to the user's specific profile URL.", "Use a thermal printer to print high-contrast, durable QR labels.", "Test the QR density to ensure it scans easily on lower-end smartphone cameras."] },
+                3: { phase: "PHASE 3", title: "RFID Encoding", desc: "Embed the digital identifier into the physical hardware.", list: ["Use a basic NFC-enabled smartphone or a dedicated USB RFID writer.", "Write the same URL (or a short ID) onto the NFC/RFID chip inside the keychain or card.", "Lock the tag if necessary to prevent malicious rewriting."] },
+                4: { phase: "PHASE 4", title: "Fulfillment & Packaging", desc: "Assemble the final product and dispatch.", list: ["Affix the printed QR label to the encoded RFID physical tag.", "Package in low-cost, professional-looking envelopes.", "Ship to the customer utilizing standard national courier services."] }
+            };
+
+            window.showStep = function(stepNum) {
+                for(let i=1; i<=4; i++) {
+                    const btn = document.getElementById('step' + i + '-btn');
+                    btn.classList.remove('step-active');
+                    btn.classList.add('step-inactive');
+                }
+                const activeBtn = document.getElementById('step' + stepNum + '-btn');
+                activeBtn.classList.remove('step-inactive');
+                activeBtn.classList.add('step-active');
+
+                const contentDiv = document.getElementById('step-content');
+                contentDiv.classList.remove('fade-in');
+                void contentDiv.offsetWidth;
+                
+                const stepData = executionSteps[stepNum];
+                let listHTML = stepData.list.map(item => `<li>${item}</li>`).join('');
+                
+                contentDiv.innerHTML = `
+                    <div class="inline-block bg-teal-100 text-teal-800 text-xs font-bold px-3 py-1 rounded-full mb-4">${stepData.phase}</div>
+                    <h3 class="text-2xl font-bold text-stone-800 mb-4">${stepData.title}</h3>
+                    <p class="text-stone-600 mb-4">${stepData.desc}</p>
+                    <ul class="list-disc list-inside text-sm text-stone-600 space-y-2">
+                        ${listHTML}
+                    </ul>
+                `;
+                contentDiv.classList.add('fade-in');
+            };
+        });
+    </script>
+</body>
+</html>
