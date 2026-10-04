@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMaxYMid slice">
+<defs>
+<pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#ffffff" stroke-opacity="0.05"/></pattern>
+<pattern id="G" width="200" height="200" patternUnits="userSpaceOnUse"><path d="M200 0H0V200" fill="none" stroke="#ffffff" stroke-opacity="0.08"/></pattern>
+</defs>
+<rect width="1600" height="900" fill="#2c3e50"/>
+<rect width="1600" height="900" fill="url(#g)"/>
+<rect width="1600" height="900" fill="url(#G)"/>
+<g fill="none" stroke="#e67e22" stroke-opacity="0.35" stroke-width="3" transform="translate(0,-60)">
+<path d="M1540.0,220.0 L1553.2,233.9 L1550.9,247.6 L1533.8,256.3 L1529.1,267.7 L1535.0,286.0 L1526.9,297.3 L1507.8,297.8 L1498.6,306.0 L1496.0,325.0 L1483.8,331.7 L1466.3,323.8 L1454.5,327.2 L1443.9,343.2 L1430.0,344.0 L1417.7,329.3 L1405.5,327.2 L1389.0,337.0 L1376.2,331.7 L1371.5,313.1 L1361.4,306.0 L1342.3,307.7 L1333.1,297.3 L1336.9,278.5 L1330.9,267.7 L1313.0,261.0 L1309.1,247.6 L1320.7,232.3 L1320.0,220.0 L1306.8,206.1 L1309.1,192.4 L1326.2,183.7 L1330.9,172.3 L1325.0,154.0 L1333.1,142.7 L1352.2,142.2 L1361.4,134.0 L1364.0,115.0 L1376.2,108.3 L1393.7,116.2 L1405.5,112.8 L1416.1,96.8 L1430.0,96.0 L1442.3,110.7 L1454.5,112.8 L1471.0,103.0 L1483.8,108.3 L1488.5,126.9 L1498.6,134.0 L1517.7,132.3 L1526.9,142.7 L1523.1,161.5 L1529.1,172.3 L1547.0,179.0 L1550.9,192.4 L1539.3,207.7 Z"/><circle cx="1430" cy="220" r="70"/><circle cx="1430" cy="220" r="24"/>
+<path d="M1332.0,120.0 L1341.2,129.7 L1339.0,139.2 L1326.3,143.6 L1322.1,150.6 L1323.8,163.8 L1316.4,170.2 L1303.6,166.3 L1296.1,169.5 L1289.7,181.2 L1280.0,182.0 L1271.9,171.4 L1263.9,169.5 L1251.9,175.2 L1243.6,170.2 L1243.2,156.8 L1237.9,150.6 L1224.8,148.1 L1221.0,139.2 L1228.6,128.1 L1228.0,120.0 L1218.8,110.3 L1221.0,100.8 L1233.7,96.4 L1237.9,89.4 L1236.2,76.2 L1243.6,69.8 L1256.4,73.7 L1263.9,70.5 L1270.3,58.8 L1280.0,58.0 L1288.1,68.6 L1296.1,70.5 L1308.1,64.8 L1316.4,69.8 L1316.8,83.2 L1322.1,89.4 L1335.2,91.9 L1339.0,100.8 L1331.4,111.9 Z" stroke-opacity="0.25"/><circle cx="1280" cy="120" r="16" stroke-opacity="0.25"/>
+</g>
+<g fill="none" stroke="#ffffff" stroke-opacity="0.12" stroke-width="2"><line x1="800" y1="712" x2="740" y2="900"/><line x1="890" y1="712" x2="850" y2="900"/><line x1="980" y1="712" x2="960" y2="900"/><line x1="1070" y1="712" x2="1070" y2="900"/><line x1="1160" y1="712" x2="1180" y2="900"/><line x1="1250" y1="712" x2="1290" y2="900"/><line x1="1340" y1="712" x2="1400" y2="900"/><line x1="1430" y1="712" x2="1510" y2="900"/><line x1="1520" y1="712" x2="1620" y2="900"/><line x1="1610" y1="712" x2="1730" y2="900"/><line x1="760" y1="712" x2="1600" y2="712"/></g>
+<g fill="none" stroke="#ffffff" stroke-opacity="0.6" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+<circle cx="1240" cy="610" r="100"/><circle cx="1240" cy="610" r="88" stroke-dasharray="14 10" stroke-opacity="0.4"/><circle cx="1240" cy="610" r="30"/>
+<circle cx="1460" cy="650" r="60"/><circle cx="1460" cy="650" r="20"/>
+<path d="M1125,575 A118,118 0 0 1 1355,575"/>
+<path d="M1170,520 L1188,370 L1310,370 L1310,525"/><line x1="1160" y1="360" x2="1322" y2="360"/>
+<line x1="1200" y1="385" x2="1200" y2="505" stroke-opacity="0.35"/>
+<rect x="1310" y="525" width="200" height="70" rx="10"/>
+<line x1="1490" y1="535" x2="1490" y2="585"/><line x1="1478" y1="535" x2="1478" y2="585"/>
+<path d="M1405,525 L1405,455 L1418,445"/>
+<line x1="1320" y1="600" x2="1470" y2="618"/>
+<path d="M1140,620 L1080,622"/>
+<rect x="880" y="602" width="200" height="20" rx="4"/>
+<path d="M900,620 L900,660 Q900,700 878,708"/><path d="M945,620 L945,660 Q945,700 923,708"/><path d="M990,620 L990,660 Q990,700 968,708"/><path d="M1035,620 L1035,660 Q1035,700 1013,708"/><path d="M1075,620 L1075,660 Q1075,700 1053,708"/>
+</g>
+<g stroke="#e67e22" stroke-opacity="0.7" stroke-width="2" fill="none">
+<line x1="880" y1="330" x2="1520" y2="330"/><line x1="880" y1="318" x2="880" y2="342"/><line x1="1520" y1="318" x2="1520" y2="342"/>
+<line x1="880" y1="342" x2="880" y2="590" stroke-dasharray="6 8" stroke-opacity="0.35"/><line x1="1520" y1="342" x2="1520" y2="520" stroke-dasharray="6 8" stroke-opacity="0.35"/>
+</g>
+<text x="1200" y="318" text-anchor="middle" font-family="monospace" font-size="18" fill="#e67e22" fill-opacity="0.8">SEW · CULTIVATOR RIG · REV 2001</text>
+</svg>
