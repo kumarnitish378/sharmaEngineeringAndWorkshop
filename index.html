@@ -88,6 +88,13 @@
                 background-image: linear-gradient(rgba(44, 62, 80, 0.88), rgba(44, 62, 80, 0.88)), url('assets/hero-bg.svg');
             }
         }
+        .services-blueprint {
+            background-color: #f9fafb;
+            background-image:
+                linear-gradient(rgba(44, 62, 80, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(44, 62, 80, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
         .glass-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
@@ -220,7 +227,8 @@
     </section>
 
     <!-- Our Expertise (Services) -->
-    <section id="services" class="py-24 container mx-auto px-4">
+    <section id="services" class="py-24 services-blueprint">
+        <div class="container mx-auto px-4">
         <div class="text-center mb-16">
             <h2 class="text-xs font-black text-safety-orange uppercase tracking-[0.3em] mb-4">Our Expertise</h2>
             <h3 class="text-3xl md:text-5xl font-black text-industrial-blue">Engineering & Manufacturing Solutions</h3>
@@ -266,6 +274,34 @@
                 <p class="text-sm text-gray-500 mb-6 leading-relaxed text-left">Precision lathe work, hydraulic system repairs, and heavy machinery overhauling handled by our expert engineering team.</p>
                 <a href="https://wa.me/919661903040" class="text-safety-orange font-black text-xs uppercase tracking-widest flex items-center gap-2 group-hover:gap-4 transition-all">Connect Now <i data-lucide="chevron-right" class="w-4 h-4"></i></a>
             </article>
+        </div>
+        <!-- Why customers choose us -->
+        <div class="bg-industrial-blue text-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden">
+            <div class="absolute -right-16 -top-16 w-64 h-64 rounded-full border-[24px] border-safety-orange/10" aria-hidden="true"></div>
+            <div class="relative flex flex-col lg:flex-row lg:items-center gap-10">
+                <div class="grid sm:grid-cols-2 xl:grid-cols-4 gap-8 flex-1">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-safety-orange shrink-0"><i data-lucide="clock" class="w-6 h-6"></i></div>
+                        <div class="text-left"><p class="font-black text-lg leading-tight">Open 7 Days</p><p class="text-sm text-gray-300 mt-1">6:00 AM – 10:00 PM, Monday to Sunday</p></div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-safety-orange shrink-0"><i data-lucide="truck" class="w-6 h-6"></i></div>
+                        <div class="text-left"><p class="font-black text-lg leading-tight">Bihar-wide Delivery</p><p class="text-sm text-gray-300 mt-1">Machinery delivered across Bihar from Kotwa</p></div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-safety-orange shrink-0"><i data-lucide="shield-check" class="w-6 h-6"></i></div>
+                        <div class="text-left"><p class="font-black text-lg leading-tight">1-Year Warranty</p><p class="text-sm text-gray-300 mt-1">On every cultivator and plough we build</p></div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center text-safety-orange shrink-0"><i data-lucide="badge-check" class="w-6 h-6"></i></div>
+                        <div class="text-left"><p class="font-black text-lg leading-tight">Genuine 304 SS</p><p class="text-sm text-gray-300 mt-1">Grade-certified steel for gates and railings</p></div>
+                    </div>
+                </div>
+                <a href="tel:+919661903040" class="bg-safety-orange hover:bg-safety-orange-hover px-8 py-5 rounded-2xl font-black text-lg inline-flex items-center justify-center gap-3 transition-all transform hover:-translate-y-1 shadow-xl shadow-safety-orange/30 shrink-0">
+                    <i data-lucide="phone" class="w-5 h-5"></i> Call +91 96619 03040
+                </a>
+            </div>
+        </div>
         </div>
     </section>
 
