@@ -2156,8 +2156,7 @@
                             </span>
                         </h4>
                         <ul class="hours-list">
-                            <li><span>Monday - Saturday</span> <span class="open">9:00 AM - 5:00 PM</span></li>
-                            <li><span>Sunday</span> <span class="closed">Closed</span></li>
+                            <li><span>Monday - Sunday</span> <span class="open">6:00 AM - 10:00 PM</span></li>
                         </ul>
                     </div>
                 </div>
@@ -2338,12 +2337,12 @@
 
         // Live Business Hours Status
         function updateLiveStatus() {
-            const now = new Date();
-            const day = now.getDay();
-            const hour = now.getHours();
+            // Hours are in India time, whatever the visitor's timezone
+            const parts = new Intl.DateTimeFormat('en-GB', { timeZone: 'Asia/Kolkata', hour: 'numeric', hourCycle: 'h23' }).formatToParts(new Date());
+            const hour = parseInt(parts.find(p => p.type === 'hour').value, 10);
             const statusText = document.getElementById('liveStatusText');
             
-            const isOpen = (day >= 1 && day <= 6) && (hour >= 9 && hour < 17);
+            const isOpen = hour >= 6 && hour < 22;
             
             if (isOpen) {
                 statusText.textContent = 'Open Now';
