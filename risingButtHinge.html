@@ -175,7 +175,7 @@
                         </select>
                     </div>
                     <div class="ctl-row"><label for="mu">Friction μ</label><input type="range" id="mu" min="0" max="0.8" step="0.01" value="0.15"><output id="muo">0.15</output></div>
-                    <label class="flex items-center gap-2 text-sm text-gray-600 font-medium pt-1"><input type="checkbox" id="ex" checked class="w-4 h-4 accent-[#e67e22]"> Show lift ×5 (so it's visible)</label>
+                    <label class="flex items-center gap-2 text-sm text-gray-600 font-medium pt-1"><input type="checkbox" id="ex" checked class="w-4 h-4 accent-[#e67e22]"> <span id="exl">Enlarge hinge (true ramp shape)</span></label>
                     <div class="ctl-row"><label for="oa">Open angle</label><input type="range" id="oa" min="0" max="170" step="1" value="0"><output id="oao">0°</output></div>
                     <div class="ctl-row"><label for="zm">Zoom on hinge</label><input type="range" id="zm" min="1" max="8" step="0.1" value="1"><output id="zmo">1.0×</output></div>
                     <p class="text-xs text-gray-500 leading-relaxed">Drag <b>Open angle</b> to hold the door open, then let go to release it. Zoom also works with the mouse wheel.</p>
@@ -316,47 +316,76 @@
         [-0.35, 1.27].forEach(x => { const b = new THREE.Mesh(new THREE.BoxGeometry(0.6, 2.3, 0.1), wm); b.position.set(x, 1.15, -0.05); scene.add(b); });
         const lint = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.1, 0.1), wm); lint.position.set(0.45, 2.25, -0.05); scene.add(lint);
 
-        const KR = 0.035, KH = 0.07;
-        const fixedMat = new THREE.MeshLambertMaterial({ color: 0x4b5563 });
-        const doorKMat = new THREE.MeshLambertMaterial({ color: 0x9ca3af });
+        const KRV = 0.035;
+        const hingeVis = () => ex ? KRV / (rMM / 1000) : 1;
+        const knuckleMat = new THREE.MeshLambertMaterial({ color: 0x8a94a3, side: THREE.DoubleSide, flatShading: true });
+        const doorKMat = new THREE.MeshLambertMaterial({ color: 0xb8c0cc, side: THREE.DoubleSide, flatShading: true });
+        const leafMat = new THREE.MeshLambertMaterial({ color: 0x6b7280 });
         const rampMat = new THREE.MeshLambertMaterial({ color: 0xe67e22 });
-        const ramps = [];
-        HB.forEach(y => {
-            const f = new THREE.Mesh(new THREE.CylinderGeometry(KR, KR, KH, 20), fixedMat);
-            f.position.set(0, 0.1 + y - KH / 2, 0); scene.add(f);
-            const line = new THREE.Mesh(new THREE.BufferGeometry(), rampMat); scene.add(line);
-            ramps.push({ y, line });
-        });
-        function buildRamps() {
-            const vis = (ex ? 5 : 1) * liftPer90() / 1000;
-            ramps.forEach(o => {
-                const pts = [];
-                for (let i = 0; i <= 40; i++) {
-                    const a = Math.PI * i / 40;
-                    pts.push(new THREE.Vector3((KR + 0.003) * Math.cos(a + Math.PI), 0.1 + o.y + vis * (a / (Math.PI / 2)) * 0.5 - 0.005, (KR + 0.003) * Math.sin(a + Math.PI)));
+        function helixKnuckle(R, kv, Hk, faceTop) {
+            const pos = [], N = 48, r0 = R * 0.32, top = kv * Math.PI;
+            const P = (r, th, y) => [r * Math.cos(th), y, -r * Math.sin(th)];
+            const q = (a, b, c, d) => { pos.push(...a, ...b, ...c, ...a, ...c, ...d); };
+            const F = faceTop ? -Hk : top + Hk;
+            for (let j = 0; j < 2; j++) {
+                for (let i = 0; i < N; i++) {
+                    const u0 = i / N, u1 = (i + 1) / N, t0 = (j + u0) * Math.PI, t1 = (j + u1) * Math.PI;
+                    const y0 = top * (1 - u0), y1 = top * (1 - u1);
+                    q(P(r0, t0, y0), P(R, t0, y0), P(R, t1, y1), P(r0, t1, y1));
+                    q(P(r0, t0, F), P(R, t0, F), P(R, t1, F), P(r0, t1, F));
+                    q(P(R, t0, y0), P(R, t0, F), P(R, t1, F), P(R, t1, y1));
+                    q(P(r0, t0, y0), P(r0, t0, F), P(r0, t1, F), P(r0, t1, y1));
                 }
-                o.line.geometry.dispose(); o.line.geometry = new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 60, 0.0035, 8, false);
+                const t = j * Math.PI;
+                q(P(r0, t, 0), P(R, t, 0), P(R, t, top), P(r0, t, top));
+            }
+            const geo = new THREE.BufferGeometry();
+            geo.setAttribute('position', new THREE.Float32BufferAttribute(pos, 3));
+            geo.computeVertexNormals();
+            return geo;
+        }
+        function rampEdge(R, kv) {
+            const pts = [], top = kv * Math.PI;
+            for (let i = 0; i <= 40; i++) { const u = i / 40, th = Math.PI * u; pts.push(new THREE.Vector3((R + 0.0012) * Math.cos(th), top * (1 - u) + 0.0012, -(R + 0.0012) * Math.sin(th))); }
+            return new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 48, Math.max(0.0012, R * 0.06), 6, false);
+        }
+        const hingeParts = [];
+        let hingeStep = 0;
+        function buildRamps() {
+            hingeParts.forEach(o => { o.parent.remove(o); o.geometry.dispose(); });
+            hingeParts.length = 0;
+            const sv = hingeVis(), R = (rMM / 1000) * sv, kv = kLead() * sv, Hk = R * 1.6, top = kv * Math.PI;
+            hingeStep = top;
+            const add = (parent, geo, mat, x, y, z) => { const mm = new THREE.Mesh(geo, mat); mm.position.set(x, y, z); parent.add(mm); hingeParts.push(mm); return mm; };
+            HB.forEach(y => {
+                add(scene, helixKnuckle(R, kv, Hk, true), knuckleMat, 0, 0.1 + y, 0);
+                add(scene, rampEdge(R, kv), rampMat, 0, 0.1 + y, 0);
+                add(scene, rampEdge(R, kv), rampMat, 0, 0.1 + y, 0).rotation.y = Math.PI;
+                add(scene, new THREE.CylinderGeometry(R * 0.3, R * 0.3, top + 2 * Hk + 0.01, 16), leafMat, 0, 0.1 + y + top / 2, 0);
+                const lw = 0.05 - R;
+                if (lw > 0) add(scene, new THREE.BoxGeometry(lw, Hk + top * 0.5, Math.max(0.003, R * 0.25)), leafMat, -R - lw / 2, 0.1 + y - Hk / 2 + top * 0.25, 0);
+                add(door, helixKnuckle(R, kv, Hk, false), doorKMat, 0, y, 0);
+                const dw = KRV + 0.06 - R;
+                add(door, new THREE.BoxGeometry(dw, Hk + top * 0.5, Math.max(0.003, R * 0.25)), doorKMat, R + dw / 2, y + top + Hk / 2 - top * 0.25, 0);
             });
         }
-        buildRamps();
-
         const lifter = new THREE.Group(); lifter.position.y = 0.1; scene.add(lifter);
         const door = new THREE.Group(); lifter.add(door);
-        HB.forEach(y => { const k = new THREE.Mesh(new THREE.CylinderGeometry(KR, KR, KH, 20), doorKMat); k.position.set(0, y + KH / 2 + 0.002, 0); door.add(k); });
         const pmat = new THREE.MeshLambertMaterial({ color: 0x3d5a78 });
         const panel = new THREE.Mesh(new THREE.BoxGeometry(W, H, 1), pmat); door.add(panel);
         const hd = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.15, 0.04), new THREE.MeshLambertMaterial({ color: 0xd1d5db })); door.add(hd);
         const cg = new THREE.Mesh(new THREE.SphereGeometry(0.035, 12, 12), new THREE.MeshLambertMaterial({ color: 0x16a34a })); door.add(cg);
         function thick() {
             const t = 0.04 + 0.08 * (m - 5) / 495;
-            panel.scale.z = t; panel.position.set(W / 2 + KR, H / 2, 0);
-            hd.position.set(W - 0.1 + KR, 1.0, t / 2 + 0.02); cg.position.set(W / 2 + KR, H / 2, 0);
+            panel.scale.z = t; panel.position.set(W / 2 + KRV, H / 2, 0);
+            hd.position.set(W - 0.1 + KRV, 1.0, t / 2 + 0.02); cg.position.set(W / 2 + KRV, H / 2, 0);
             pmat.color.set(m > 150 ? 0x5f6b77 : 0x3d5a78);
         }
         thick();
+        buildRamps();
 
         let az = 0.8, el = 0.32, drag = false, lx = 0, ly = 0, zoom = 1;
-        const T_DOOR = new THREE.Vector3(0.45, 1.0, 0.2), T_HINGE = new THREE.Vector3(0, 0.3, 0);
+        const T_DOOR = new THREE.Vector3(0.45, 1.0, 0.2), T_HINGE = new THREE.Vector3(0, 0.33, 0);
         function place() {
             const f = Math.min(1, (zoom - 1) / 7 * 1.6), R = 4.2 / zoom, t = T_DOOR.clone().lerp(T_HINGE, f);
             const a = az - f * 1.4, e = el + f * 0.15;
@@ -387,13 +416,15 @@
             const e = $(id);
             e.addEventListener('input', () => { fn(+e.value); $(id + 'o').textContent = fmt(+e.value); live.stuck = false; });
         }
+        function exLabel() { $('exl').textContent = 'Enlarge hinge ×' + hingeVis().toFixed(1) + ' (true ramp shape)'; }
+        exLabel();
         bind('ms', v => { m = v; thick(); }, v => v + ' kg');
         bind('la', v => { lamDeg = v; buildRamps(); }, v => v + '°');
-        bind('rk', v => { rMM = v; buildRamps(); }, v => v + ' mm');
+        bind('rk', v => { rMM = v; buildRamps(); exLabel(); }, v => v + ' mm');
         bind('mu', v => mu = v, v => v.toFixed(2));
         bind('al', v => al = v, v => v.toFixed(2));
         $('hp').addEventListener('change', e => { mu = +e.target.value; $('mu').value = mu; $('muo').textContent = mu.toFixed(2); live.stuck = false; });
-        $('ex').addEventListener('change', e => { ex = e.target.checked; buildRamps(); });
+        $('ex').addEventListener('change', e => { ex = e.target.checked; buildRamps(); exLabel(); });
         function openTo(d) { M = drawM(); live.phi = d * D; live.om = 0; live.stuck = false; }
         $('o70').onclick = () => openTo(70);
         $('o120').onclick = () => openTo(120);
@@ -442,7 +473,7 @@
             const Tf = Tf0(mu * M);
             for (let i = 0; i < 8; i++) step(live, dt / 8, Tf);
             const liftNow = kLead() * live.phi;
-            lifter.position.y = 0.1 + liftNow * (ex ? 5 : 1);
+            lifter.position.y = 0.1 + liftNow * hingeVis();
             door.rotation.y = -live.phi;
             $('ang').textContent = Math.round(live.phi / D) + '°';
             $('rise').textContent = (liftNow * 1000).toFixed(1) + ' mm';
