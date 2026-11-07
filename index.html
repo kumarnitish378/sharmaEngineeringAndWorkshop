@@ -335,9 +335,30 @@
                     <i data-lucide="message-circle" class="w-4 h-4"></i>
                     <span>Get Quote</span>
                 </a>
+                <button type="button" id="menu-btn" class="lg:hidden p-2.5 rounded-xl border border-gray-200 text-industrial-blue" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu" onclick="var m=document.getElementById('mobile-menu');var o=m.classList.toggle('hidden');this.setAttribute('aria-expanded',String(!o));this.setAttribute('aria-label',o?'Open menu':'Close menu');">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+                </button>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden lg:hidden border-t border-gray-200 bg-white max-h-[75vh] overflow-y-auto">
+            <div class="container mx-auto px-4 py-3 grid gap-1">
+            <a href="#services" class="block px-4 py-3 rounded-xl font-bold text-sm uppercase text-industrial-blue hover:bg-gray-100">Services</a>
+            <a href="#research" class="block px-4 py-3 rounded-xl font-bold text-sm uppercase text-industrial-blue hover:bg-gray-100">Research (R&amp;D)</a>
+            <a href="#leadership" class="block px-4 py-3 rounded-xl font-bold text-sm uppercase text-industrial-blue hover:bg-gray-100">Leadership</a>
+            <a href="#testimonials" class="block px-4 py-3 rounded-xl font-bold text-sm uppercase text-industrial-blue hover:bg-gray-100">Reviews</a>
+            <a href="#faq" class="block px-4 py-3 rounded-xl font-bold text-sm uppercase text-industrial-blue hover:bg-gray-100">FAQs</a>
+            <a href="gravityDoorCloser.html" class="block px-4 py-3 rounded-xl font-bold text-sm uppercase text-industrial-blue hover:bg-gray-100 text-safety-orange">Door Simulator</a>
+            <a href="risingButtHinge.html" class="block px-4 py-3 rounded-xl font-bold text-sm uppercase text-industrial-blue hover:bg-gray-100 text-safety-orange">Rising Butt Hinge</a>
+            <a href="home.html" class="block px-4 py-3 rounded-xl font-bold text-sm uppercase text-industrial-blue hover:bg-gray-100">Home</a>
+            <a href="mataJiOnlineShop.html" class="block px-4 py-3 rounded-xl font-bold text-sm uppercase text-industrial-blue hover:bg-gray-100">MataJi Shop</a>
+            <a href="promptGenerator.html" class="block px-4 py-3 rounded-xl font-bold text-sm uppercase text-industrial-blue hover:bg-gray-100">Prompt Generator</a>
+            <a href="hotelPrimer.html" class="block px-4 py-3 rounded-xl font-bold text-sm uppercase text-industrial-blue hover:bg-gray-100">Hotel Premier</a>
+            <a href="safeTag.html" class="block px-4 py-3 rounded-xl font-bold text-sm uppercase text-industrial-blue hover:bg-gray-100">Safe Tag</a>
+            <a href="printWave.html" class="block px-4 py-3 rounded-xl font-bold text-sm uppercase text-industrial-blue hover:bg-gray-100">Print Wave</a>
             </div>
         </div>
     </nav>
+    <script>document.querySelectorAll('#mobile-menu a').forEach(function(a){a.addEventListener('click',function(){document.getElementById('mobile-menu').classList.add('hidden');document.getElementById('menu-btn').setAttribute('aria-expanded','false');});});</script>
 
     <!-- Hero Section -->
     <header class="hero-gradient min-h-[90vh] flex items-center text-white relative" role="banner">
