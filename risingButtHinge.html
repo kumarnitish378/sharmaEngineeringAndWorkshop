@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en-IN" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rising Butt Hinge Simulator – Spring-Free Self-Closing Door | Sharma Engineering &amp; Workshop</title>
+    <meta name="description" content="Interactive 3D simulator of a rising butt (lift-off) hinge: the door rides up a helical ramp as it opens and closes by its own weight. Adjust lift, knuckle size, door mass up to 500 kg and friction, and test 200 doors with Sharma ABS variation.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://printfile.in/risingButtHinge.html">
+    <meta name="theme-color" content="#2c3e50">
+
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Sharma Engineering and Workshop">
+    <meta property="og:locale" content="en_IN">
+    <meta property="og:url" content="https://printfile.in/risingButtHinge.html">
+    <meta property="og:title" content="Rising Butt Hinge Simulator – Sharma Engineering &amp; Workshop">
+    <meta property="og:description" content="See how a rising butt hinge lifts a door on a helical ramp so it closes by its own weight, with no spring.">
+    <meta property="og:image" content="https://printfile.in/assets/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Rising Butt Hinge Simulator",
+      "url": "https://printfile.in/risingButtHinge.html",
+      "applicationCategory": "EngineeringApplication",
+      "operatingSystem": "Any (web browser)",
+      "description": "3D simulator of a spring-free, self-closing door on rising butt (helical lift-off) hinges, with door mass, ramp lift, hinge friction and Sharma ABS Monte Carlo variation.",
+      "offers": { "@type": "Offer", "price": "0", "priceCurrency": "INR" },
+      "provider": { "@id": "https://printfile.in/#business", "@type": "LocalBusiness", "name": "Sharma Engineering and Workshop", "telephone": "+919661903040" }
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'industrial-blue': '#2c3e50',
+                        'safety-orange': '#e67e22',
+                        'safety-orange-hover': '#d35400',
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] },
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f9fafb;
+            background-image: url('assets/page-bg.svg');
+            background-size: 320px 320px;
+            background-attachment: fixed;
+        }
+        input[type=range] { accent-color: #e67e22; width: 100%; }
+        .ctl-row { display: grid; grid-template-columns: 7.5rem minmax(0,1fr) 4.5rem; align-items: center; gap: .75rem; }
+        .ctl-row label { font-size: .85rem; font-weight: 600; color: #4b5563; }
+        .ctl-row output { font-size: .85rem; font-weight: 700; color: #2c3e50; text-align: right; }
+        #sim-canvas { touch-action: none; cursor: grab; }
+        #sim-canvas:active { cursor: grabbing; }
+        .bar { height: 10px; border-radius: 5px; background: #2c3e50; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 overflow-x-hidden">
+
+    <nav class="sticky top-0 z-50 bg-white shadow-sm border-b" aria-label="Main Navigation">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="index.html" class="flex flex-col text-left">
+                <span class="text-xl md:text-2xl font-black text-industrial-blue leading-none tracking-tighter uppercase">SHARMA</span>
+                <span class="text-[9px] md:text-xs font-bold tracking-[0.2em] text-safety-orange uppercase">Engineering & Workshop</span>
+            </a>
+            <div class="hidden lg:flex items-center gap-8 font-bold text-sm text-industrial-blue uppercase">
+                <a href="index.html#services" class="hover:text-safety-orange transition">Services</a>
+                <a href="index.html#research" class="hover:text-safety-orange transition">Research (R&D)</a>
+                <a href="gravityDoorCloser.html" class="text-safety-orange border-b-2 border-safety-orange pb-0.5" aria-current="page">Door Simulator</a>
+                <a href="index.html#faq" class="hover:text-safety-orange transition">FAQs</a>
+            </div>
+            <a href="https://wa.me/919661903040?text=Hi%20Sharma%20Engineering%20and%20Workshop%2C%20I%20saw%20the%20rising%20butt%20hinge%20simulator%20and%20would%20like%20a%20quote." target="_blank" rel="noopener" class="bg-safety-orange hover:bg-safety-orange-hover text-white px-6 py-2.5 rounded-xl font-bold transition flex items-center gap-2 text-sm shadow-lg shadow-safety-orange/30">
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+                <span>Get Quote</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="bg-white border-b border-gray-200">
+        <div class="container mx-auto px-4 flex gap-2 overflow-x-auto text-sm font-bold" role="tablist" aria-label="Door simulators">
+            <a href="gravityDoorCloser.html" role="tab" aria-selected="false" class="px-4 py-3 border-b-4 border-transparent text-industrial-blue hover:text-safety-orange whitespace-nowrap">Inclined hinge</a>
+            <a href="risingButtHinge.html" role="tab" aria-selected="true" class="px-4 py-3 border-b-4 border-safety-orange text-safety-orange whitespace-nowrap">Rising butt hinge</a>
+        </div>
+    </div>
+
+    <header class="bg-industrial-blue text-white">
+        <div class="container mx-auto px-4 py-12 md:py-16">
+            <a href="index.html" class="inline-flex items-center gap-1 text-xs font-bold uppercase tracking-widest text-white/70 hover:text-white mb-6">
+                <i data-lucide="arrow-left" class="w-4 h-4"></i> Back to home
+            </a>
+            <span class="block text-safety-orange text-xs font-black uppercase tracking-[0.25em] mb-3">Engineering tool · R&amp;D</span>
+            <h1 class="text-3xl md:text-5xl font-black tracking-tight mb-4">Rising butt hinge simulator</h1>
+            <p class="text-white/80 max-w-3xl text-base md:text-lg leading-relaxed">
+                A rising butt hinge has a helical ramp inside its knuckle, like a short screw thread. As the door opens it rides up the ramp and lifts a few millimetres. Let go, and its weight slides it back down the ramp until it's closed. No spring, no tilted frame.
+            </p>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-10 md:py-14">
+
+        <section class="grid lg:grid-cols-5 gap-6 lg:gap-8" aria-label="Simulator">
+            <div class="lg:col-span-3 space-y-4">
+                <div class="bg-white rounded-3xl border border-gray-200 shadow-sm overflow-hidden">
+                    <div id="sim-canvas" class="w-full h-[320px] md:h-[440px] bg-gray-100"></div>
+                    <div class="flex flex-wrap items-center justify-between gap-2 px-4 py-3 border-t border-gray-100 text-xs text-gray-500">
+                        <span class="flex items-center gap-1"><i data-lucide="rotate-3d" class="w-4 h-4"></i> Drag to rotate the view</span>
+                        <span class="flex items-center gap-3">
+                            <span class="flex items-center gap-1"><span class="inline-block w-3 h-1 bg-[#e67e22] rounded"></span>Helical ramp</span>
+                            <span class="flex items-center gap-1"><span class="inline-block w-2.5 h-2.5 rounded-full bg-[#16a34a]"></span>Centre of mass</span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                    <div class="bg-white rounded-2xl border border-gray-200 p-4"><div class="text-xs font-semibold text-gray-500">Door angle</div><div id="ang" class="text-2xl font-black text-industrial-blue">0°</div></div>
+                    <div class="bg-white rounded-2xl border border-gray-200 p-4"><div class="text-xs font-semibold text-gray-500">Lifted by</div><div id="rise" class="text-2xl font-black text-industrial-blue">0 mm</div></div>
+                    <div class="bg-white rounded-2xl border border-gray-200 p-4"><div class="text-xs font-semibold text-gray-500">Ramp pull (any angle)</div><div id="tg" class="text-2xl font-black text-industrial-blue">0 N·m</div></div>
+                    <div class="bg-white rounded-2xl border border-gray-200 p-4"><div class="text-xs font-semibold text-gray-500">Hinge friction</div><div id="tf" class="text-2xl font-black text-industrial-blue">0 N·m</div></div>
+                </div>
+
+                <div class="bg-white rounded-2xl border border-gray-200 p-4 space-y-2">
+                    <p id="state" class="text-sm font-semibold text-industrial-blue" aria-live="polite">Door is closed.</p>
+                    <p id="margin" class="text-sm"></p>
+                    <p id="load" class="text-sm text-gray-500"></p>
+                </div>
+            </div>
+
+            <div class="lg:col-span-2 space-y-4">
+                <div class="bg-white rounded-3xl border border-gray-200 shadow-sm p-5 md:p-6 space-y-4">
+                    <h2 class="text-lg font-black text-industrial-blue">Door and hinge</h2>
+                    <div class="ctl-row"><label for="ms">Door mass</label><input type="range" id="ms" min="5" max="500" step="5" value="25"><output id="mso">25 kg</output></div>
+                    <div class="ctl-row"><label for="lf">Lift per 90°</label><input type="range" id="lf" min="2" max="20" step="0.5" value="10"><output id="lfo">10 mm</output></div>
+                    <div class="ctl-row"><label for="rk">Knuckle radius</label><input type="range" id="rk" min="5" max="20" step="0.5" value="9"><output id="rko">9 mm</output></div>
+                    <div class="ctl-row"><label for="hp">Hinge finish</label>
+                        <select id="hp" class="col-span-2 border border-gray-300 rounded-lg px-3 py-2 text-sm font-semibold text-industrial-blue bg-white">
+                            <option value="0.08">Brass / nylon washer</option>
+                            <option value="0.15" selected>Greased steel</option>
+                            <option value="0.35">Dry steel</option>
+                            <option value="0.6">Rusty</option>
+                        </select>
+                    </div>
+                    <div class="ctl-row"><label for="mu">Friction μ</label><input type="range" id="mu" min="0" max="0.8" step="0.01" value="0.15"><output id="muo">0.15</output></div>
+                    <label class="flex items-center gap-2 text-sm text-gray-600 font-medium pt-1"><input type="checkbox" id="ex" checked class="w-4 h-4 accent-[#e67e22]"> Show lift ×5 (so it's visible)</label>
+                    <div class="flex flex-wrap gap-2 pt-2">
+                        <button id="o70" class="bg-industrial-blue hover:bg-gray-800 text-white text-sm font-bold px-4 py-2.5 rounded-xl transition">Open 70°</button>
+                        <button id="o120" class="border-2 border-industrial-blue text-industrial-blue hover:bg-gray-100 text-sm font-bold px-4 py-2 rounded-xl transition">Open 120°</button>
+                        <button id="o170" class="border-2 border-industrial-blue text-industrial-blue hover:bg-gray-100 text-sm font-bold px-4 py-2 rounded-xl transition">Open 170°</button>
+                    </div>
+                    <p class="text-xs text-gray-500 leading-relaxed">Steeper ramp (more lift, smaller knuckle) means a stronger pull but a heavier push to open. Typical rising butts lift about 6–12 mm over 90°.</p>
+                </div>
+
+                <div class="bg-white rounded-3xl border border-gray-200 shadow-sm p-5 md:p-6 space-y-4">
+                    <h2 class="text-lg font-black text-industrial-blue">Batch test (Sharma ABS model)</h2>
+                    <p class="text-sm text-gray-600 leading-relaxed">No two hinges are identical. Each door gets a random friction multiplier <span class="font-mono text-xs bg-gray-100 px-1.5 py-0.5 rounded">M = 1 + α(η − 1)</span> from the Sharma ABS model (a = −10, b = 10, n = 12, mean-normalised), which is always positive.</p>
+                    <div class="ctl-row"><label for="al">Variation α</label><input type="range" id="al" min="0" max="1" step="0.05" value="0.5"><output id="alo">0.50</output></div>
+                    <button id="mcb" class="w-full bg-safety-orange hover:bg-safety-orange-hover text-white text-sm font-bold px-4 py-3 rounded-xl transition flex items-center justify-center gap-2"><i data-lucide="flask-conical" class="w-4 h-4"></i> Test 200 doors from 70°</button>
+                    <div id="mcout" aria-live="polite"></div>
+                    <a href="https://github.com/kumarnitish378/sharma-abs-model" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-xs font-bold text-safety-orange hover:underline">About the Sharma ABS model <i data-lucide="external-link" class="w-3.5 h-3.5"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <section class="mt-14 grid md:grid-cols-3 gap-6" aria-label="How it works">
+            <div class="bg-white rounded-3xl border border-gray-200 p-6">
+                <i data-lucide="spline" class="w-8 h-8 text-safety-orange mb-3"></i>
+                <h2 class="text-lg font-black text-industrial-blue mb-2">A screw run backwards</h2>
+                <p class="text-sm text-gray-600 leading-relaxed">The knuckle's helix works like a nut on a steep thread. The door's weight pushes down on the ramp, and the slope turns that push into a closing twist. It works as long as the ramp is steeper than the friction angle.</p>
+            </div>
+            <div class="bg-white rounded-3xl border border-gray-200 p-6">
+                <i data-lucide="equal" class="w-8 h-8 text-safety-orange mb-3"></i>
+                <h2 class="text-lg font-black text-industrial-blue mb-2">Same pull at every angle</h2>
+                <p class="text-sm text-gray-600 leading-relaxed">Unlike an inclined hinge, the pull doesn't fade near 90°. The door comes back even from 170°. The trade-off is that the closing pull near the frame is no stronger than anywhere else.</p>
+            </div>
+            <div class="bg-white rounded-3xl border border-gray-200 p-6">
+                <i data-lucide="ruler" class="w-8 h-8 text-safety-orange mb-3"></i>
+                <h2 class="text-lg font-black text-industrial-blue mb-2">Fitting tips</h2>
+                <p class="text-sm text-gray-600 leading-relaxed">Rising butts are handed (left or right), so order the right one. Bevel the top hinge-side edge of the door and leave a top gap of a few mm more than the lift, so the door doesn't rub the frame as it rises. The door also lifts straight off for removal.</p>
+            </div>
+        </section>
+
+        <section class="mt-6 bg-white rounded-3xl border border-gray-200 p-6 md:p-8" aria-label="Model limits">
+            <h2 class="text-lg font-black text-industrial-blue mb-3">How accurate is this?</h2>
+            <p class="text-sm text-gray-600 leading-relaxed mb-3">The ramp is modelled as a single-start helix with constant lead, using the standard screw equation: closing torque = W·r·(tan λ − μ)/(1 + μ·tan λ), plus friction at the pin from the door's sideways pull (hinges 1.6 m apart, 6 mm pin radius). The door is a uniform 0.9 m × 2.0 m panel. Friction coefficients are typical textbook values, not measurements.</p>
+            <p class="text-sm text-gray-600 leading-relaxed">Not modelled: latches, seals, wear on the ramp, and the small extra friction while the door is being pushed open. Use it to compare ramp sizes and finishes, then check on the real door with a spring balance at the handle.</p>
+        </section>
+
+        <section class="mt-6 bg-industrial-blue text-white rounded-3xl p-6 md:p-10 flex flex-col md:flex-row md:items-center md:justify-between gap-6" aria-label="Contact">
+            <div>
+                <h2 class="text-2xl font-black mb-2">Need self-closing hinges or a door made?</h2>
+                <p class="text-white/80 text-sm max-w-xl">We fabricate SS gates, heavy doors and custom hinges in Kotwa, East Champaran. Open 7 days, 6:00 AM – 10:00 PM.</p>
+            </div>
+            <div class="flex flex-wrap gap-3">
+                <a href="https://wa.me/919661903040?text=Hi%20Sharma%20Engineering%20and%20Workshop%2C%20I%20need%20rising%20butt%20hinges%20or%20a%20self-closing%20door." target="_blank" rel="noopener" class="bg-safety-orange hover:bg-safety-orange-hover text-white px-6 py-3 rounded-xl font-bold transition flex items-center gap-2 text-sm"><i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp us</a>
+                <a href="tel:+919661903040" class="border-2 border-white/40 hover:border-white text-white px-6 py-3 rounded-xl font-bold transition flex items-center gap-2 text-sm"><i data-lucide="phone" class="w-4 h-4"></i> +91 96619 03040</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-gray-950 text-gray-500 py-12">
+        <div class="container mx-auto px-4 text-center">
+            <span class="text-white text-xl font-black uppercase tracking-tighter">Sharma Engineering and Workshop</span>
+            <nav class="flex flex-wrap justify-center gap-x-10 gap-y-4 my-8 text-[10px] font-black uppercase tracking-[0.2em]">
+                <a href="index.html" class="hover:text-white transition">Home</a>
+                <a href="index.html#services" class="hover:text-white transition">Services</a>
+                <a href="index.html#research" class="hover:text-white transition">Robotics (R&D)</a>
+                <a href="gravityDoorCloser.html" class="hover:text-white transition">Door Simulator</a>
+                <a href="risingButtHinge.html" class="text-white">Rising Butt Hinge</a>
+                <a href="index.html#faq" class="hover:text-white transition">FAQs</a>
+            </nav>
+            <address class="not-italic text-gray-500 text-sm leading-relaxed">
+                Maduahan, Jasauli Patti, Kotwa, East Champaran, Bihar 845429<br>
+                <a href="tel:+919661903040" class="text-safety-orange font-bold">+91 96619 03040</a> · Open 7 days, 6:00 AM – 10:00 PM
+            </address>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+    (function () {
+        const D = Math.PI / 180, W = 0.9, H = 2.0, g = 9.81, c = 0.8, RP = 0.006, L = 1.6, HB = [0.2, 1.8];
+        let m = 25, liftMM = 10, rMM = 9, mu = 0.15, al = 0.5, ex = true, M = 1;
+        const live = { phi: 0, om: 0, stuck: true };
+        const $ = id => document.getElementById(id);
+
+        const A = -10, B = 10, NN = 12, NBIG = NN * (Math.abs(A) + Math.abs(B));
+        const absMean = (() => {
+            const k = B - A + 1; let p = [1];
+            for (let i = 0; i < NN; i++) {
+                const q = new Array(p.length + k - 1).fill(0);
+                p.forEach((v, j) => { for (let t = 0; t < k; t++) q[j + t] += v / k; });
+                p = q;
+            }
+            const lo = NN * A;
+            return p.reduce((s, v, i) => s + v * NBIG / (NBIG + lo + i), 0);
+        })();
+        function eta() { let s = 0; for (let i = 0; i < NN; i++) s += A + Math.floor(Math.random() * (B - A + 1)); return NBIG / (NBIG + s) / absMean; }
+        const drawM = () => 1 + al * (eta() - 1);
+
+        const kLead = () => (liftMM / 1000) / (Math.PI / 2);
+        const tanL = () => kLead() / (rMM / 1000);
+        const tauG = () => -m * g * kLead();
+        function Tf0(muX) {
+            const t = tanL(), r = rMM / 1000;
+            const helix = muX * m * g * r * (1 + t * t) / (1 + muX * t);
+            const pin = muX * m * g * W * RP / L;
+            return helix + pin;
+        }
+        const Ii = () => m * W * W / 3;
+
+        function step(s, dt, Tf) {
+            const tg = s.phi > 0 ? tauG() : 0;
+            if (s.stuck) { if (Math.abs(tg) > Tf * 1.0001) s.stuck = false; else return; }
+            let net;
+            if (Math.abs(s.om) < 1e-4) {
+                if (Math.abs(tg) <= Tf) { s.om = 0; s.stuck = true; return; }
+                net = tg - Tf * Math.sign(tg);
+            } else net = tg - Tf * Math.sign(s.om) - c * s.om;
+            let nom = s.om + net / Ii() * dt;
+            if (s.om !== 0 && Math.sign(nom) !== Math.sign(s.om) && Math.abs(tg) <= Tf) nom = 0;
+            s.om = nom; s.phi += s.om * dt;
+            if (s.phi <= 0) { s.phi = 0; s.om = s.om < -0.05 ? -s.om * 0.2 : 0; if (s.om === 0) s.stuck = true; }
+            if (s.phi >= 175 * D) { s.phi = 175 * D; s.om = 0; }
+        }
+
+        const wrap = $('sim-canvas');
+        const size = () => [wrap.clientWidth, wrap.clientHeight];
+        const scene = new THREE.Scene();
+        const [w0, h0] = size();
+        const cam = new THREE.PerspectiveCamera(40, w0 / h0, 0.1, 50);
+        const r = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        r.setPixelRatio(Math.min(window.devicePixelRatio, 2)); r.setSize(w0, h0); wrap.appendChild(r.domElement);
+        scene.add(new THREE.AmbientLight(0xffffff, 0.65));
+        const dl = new THREE.DirectionalLight(0xffffff, 0.6); dl.position.set(3, 5, 4); scene.add(dl);
+        const grid = new THREE.GridHelper(4, 16, 0x9ca3af, 0xd1d5db); grid.position.set(0.5, 0, 0); scene.add(grid);
+        const wm = new THREE.MeshLambertMaterial({ color: 0xc7c2b8 });
+        [-0.35, 1.27].forEach(x => { const b = new THREE.Mesh(new THREE.BoxGeometry(0.6, 2.3, 0.1), wm); b.position.set(x, 1.15, -0.05); scene.add(b); });
+        const lint = new THREE.Mesh(new THREE.BoxGeometry(1.0, 0.1, 0.1), wm); lint.position.set(0.45, 2.25, -0.05); scene.add(lint);
+
+        const KR = 0.035, KH = 0.07;
+        const fixedMat = new THREE.MeshLambertMaterial({ color: 0x4b5563 });
+        const doorKMat = new THREE.MeshLambertMaterial({ color: 0x9ca3af });
+        const rampMat = new THREE.LineBasicMaterial({ color: 0xe67e22 });
+        const ramps = [];
+        HB.forEach(y => {
+            const f = new THREE.Mesh(new THREE.CylinderGeometry(KR, KR, KH, 20), fixedMat);
+            f.position.set(0, 0.1 + y - KH / 2, 0); scene.add(f);
+            const line = new THREE.Line(new THREE.BufferGeometry(), rampMat); scene.add(line);
+            ramps.push({ y, line });
+        });
+        function buildRamps() {
+            const vis = (ex ? 5 : 1) * liftMM / 1000;
+            ramps.forEach(o => {
+                const pts = [];
+                for (let i = 0; i <= 40; i++) {
+                    const a = Math.PI * i / 40;
+                    pts.push(new THREE.Vector3((KR + 0.003) * Math.cos(a + Math.PI), 0.1 + o.y + vis * (a / (Math.PI / 2)) * 0.5 - 0.005, (KR + 0.003) * Math.sin(a + Math.PI)));
+                }
+                o.line.geometry.dispose(); o.line.geometry = new THREE.BufferGeometry().setFromPoints(pts);
+            });
+        }
+        buildRamps();
+
+        const lifter = new THREE.Group(); lifter.position.y = 0.1; scene.add(lifter);
+        const door = new THREE.Group(); lifter.add(door);
+        HB.forEach(y => { const k = new THREE.Mesh(new THREE.CylinderGeometry(KR, KR, KH, 20), doorKMat); k.position.set(0, y + KH / 2 + 0.002, 0); door.add(k); });
+        const pmat = new THREE.MeshLambertMaterial({ color: 0x3d5a78 });
+        const panel = new THREE.Mesh(new THREE.BoxGeometry(W, H, 1), pmat); door.add(panel);
+        const hd = new THREE.Mesh(new THREE.BoxGeometry(0.03, 0.15, 0.04), new THREE.MeshLambertMaterial({ color: 0xd1d5db })); door.add(hd);
+        const cg = new THREE.Mesh(new THREE.SphereGeometry(0.035, 12, 12), new THREE.MeshLambertMaterial({ color: 0x16a34a })); door.add(cg);
+        function thick() {
+            const t = 0.04 + 0.08 * (m - 5) / 495;
+            panel.scale.z = t; panel.position.set(W / 2 + KR, H / 2, 0);
+            hd.position.set(W - 0.1 + KR, 1.0, t / 2 + 0.02); cg.position.set(W / 2 + KR, H / 2, 0);
+            pmat.color.set(m > 150 ? 0x5f6b77 : 0x3d5a78);
+        }
+        thick();
+
+        let az = 0.8, el = 0.32, drag = false, lx = 0, ly = 0;
+        function place() {
+            const R = 4.2, t = new THREE.Vector3(0.45, 1.0, 0.2);
+            cam.position.set(t.x + R * Math.cos(el) * Math.sin(az), t.y + R * Math.sin(el), t.z + R * Math.cos(el) * Math.cos(az));
+            cam.lookAt(t);
+        }
+        place();
+        wrap.addEventListener('pointerdown', e => { drag = true; lx = e.clientX; ly = e.clientY; wrap.setPointerCapture(e.pointerId); });
+        wrap.addEventListener('pointermove', e => {
+            if (!drag) return;
+            az -= (e.clientX - lx) * 0.01;
+            el = Math.max(0.05, Math.min(1.3, el + (e.clientY - ly) * 0.008));
+            lx = e.clientX; ly = e.clientY; place();
+        });
+        wrap.addEventListener('pointerup', () => drag = false);
+
+        function bind(id, fn, fmt) {
+            const e = $(id);
+            e.addEventListener('input', () => { fn(+e.value); $(id + 'o').textContent = fmt(+e.value); live.stuck = false; });
+        }
+        bind('ms', v => { m = v; thick(); }, v => v + ' kg');
+        bind('lf', v => { liftMM = v; buildRamps(); }, v => v + ' mm');
+        bind('rk', v => rMM = v, v => v + ' mm');
+        bind('mu', v => mu = v, v => v.toFixed(2));
+        bind('al', v => al = v, v => v.toFixed(2));
+        $('hp').addEventListener('change', e => { mu = +e.target.value; $('mu').value = mu; $('muo').textContent = mu.toFixed(2); live.stuck = false; });
+        $('ex').addEventListener('change', e => { ex = e.target.checked; buildRamps(); });
+        function openTo(d) { M = drawM(); live.phi = d * D; live.om = 0; live.stuck = false; }
+        $('o70').onclick = () => openTo(70);
+        $('o120').onclick = () => openTo(120);
+        $('o170').onclick = () => openTo(170);
+
+        function marginHtml() {
+            const Tf = Tf0(mu), mg = -tauG();
+            const ratio = Tf < 1e-9 ? Infinity : mg / Tf;
+            const lam = Math.atan(tanL()) / D, fr = Math.atan(mu) / D;
+            const ok = ratio > 1;
+            return '<span class="font-bold ' + (ok ? 'text-green-700' : 'text-red-600') + '">Ramp pull vs friction: ' + (isFinite(ratio) ? ratio.toFixed(2) + '×' : '∞') + '</span> <span class="text-gray-500">— ramp angle ' + lam.toFixed(0) + '° vs friction angle ' + fr.toFixed(0) + '°. Above 1× it closes from any angle.</span>';
+        }
+        function loadTxt() {
+            const fh = m * g * (W / 2) / L;
+            const push = (-tauG() + Tf0(mu)) / (W - 0.1);
+            return 'Hinge loads: ' + Math.round(fh) + ' N sideways pull on each hinge, ' + Math.round(m * g) + ' N weight on the ramps. Push needed at the handle to open: about ' + push.toFixed(push < 10 ? 1 : 0) + ' N.' + (m > 150 ? ' At this weight, use heavy-duty rising hinges with hardened ramps, or a floor pivot.' : '');
+        }
+
+        $('mcb').onclick = () => {
+            const res = [], Ms = [];
+            const sim = k => { const Tf = Tf0(mu * k); const s = { phi: 70 * D, om: 0, stuck: false }; for (let t = 0; t < 7500; t++) { step(s, 0.004, Tf); if (s.stuck) break; } return s.phi / D; };
+            const base = sim(1);
+            for (let i = 0; i < 200; i++) { const k = drawM(); Ms.push(k); res.push(sim(k)); }
+            const bins = [[0, 1, 'Closed (<1°)'], [1, 10, '1–10°'], [10, 30, '10–30°'], [30, 60, '30–60°'], [60, 999, 'Stuck >60°']];
+            const cnt = bins.map(b => res.filter(v => v >= b[0] && v < b[1]).length);
+            const mx = Math.max(...cnt, 1);
+            let h = '<div class="grid grid-cols-2 gap-3 mb-4">' +
+                '<div class="bg-gray-50 rounded-xl p-3"><div class="text-xs font-semibold text-gray-500">Without ABS</div><div class="text-lg font-black text-industrial-blue">' + (base < 1 ? 'Closes' : 'Stops at ' + Math.round(base) + '°') + '</div></div>' +
+                '<div class="bg-gray-50 rounded-xl p-3"><div class="text-xs font-semibold text-gray-500">With ABS (200 doors)</div><div class="text-lg font-black text-industrial-blue">' + Math.round(cnt[0] / 2) + '% close</div></div></div>';
+            bins.forEach((b, i) => {
+                h += '<div class="flex items-center gap-2 my-1.5 text-xs"><span class="w-24 text-gray-500 font-semibold">' + b[2] + '</span><div class="flex-1"><div class="bar" style="width:' + (cnt[i] / mx * 100) + '%;' + (i === 0 ? 'background:#16a34a' : '') + '"></div></div><span class="w-8 text-right font-bold text-industrial-blue">' + cnt[i] + '</span></div>';
+            });
+            h += '<p class="text-xs text-gray-500 mt-2">Friction multiplier M ranged ' + Math.min(...Ms).toFixed(2) + '–' + Math.max(...Ms).toFixed(2) + ' across the batch.</p>';
+            $('mcout').innerHTML = h;
+        };
+
+        let last = performance.now();
+        const fmt = v => v >= 10 ? v.toFixed(1) : v.toFixed(2);
+        function loop(now) {
+            const dt = Math.min(0.05, (now - last) / 1000); last = now;
+            const Tf = Tf0(mu * M);
+            for (let i = 0; i < 8; i++) step(live, dt / 8, Tf);
+            const liftNow = kLead() * live.phi;
+            lifter.position.y = 0.1 + liftNow * (ex ? 5 : 1);
+            door.rotation.y = -live.phi;
+            $('ang').textContent = Math.round(live.phi / D) + '°';
+            $('rise').textContent = (liftNow * 1000).toFixed(1) + ' mm';
+            $('tg').textContent = fmt(-tauG()) + ' N·m';
+            $('tf').textContent = fmt(Tf) + ' N·m';
+            $('margin').innerHTML = marginHtml();
+            $('load').textContent = loadTxt();
+            const d = live.phi / D; let s;
+            if (live.stuck && d < 0.5) s = 'Door is closed.';
+            else if (live.stuck) s = 'Stuck at ' + Math.round(d) + '°: friction on the ramp is stronger than the door’s weight can overcome. (This hinge: friction ×' + M.toFixed(2) + ')';
+            else s = 'Sliding down the ramp… (this hinge: friction ×' + M.toFixed(2) + ')';
+            if ($('state').textContent !== s) $('state').textContent = s;
+            r.render(scene, cam);
+            requestAnimationFrame(loop);
+        }
+        requestAnimationFrame(loop);
+
+        new ResizeObserver(() => { const [w, h] = size(); r.setSize(w, h); cam.aspect = w / h; cam.updateProjectionMatrix(); }).observe(wrap);
+    })();
+    window.addEventListener('load', () => { if (window.lucide) lucide.createIcons(); });
+    </script>
+</body>
+</html>
